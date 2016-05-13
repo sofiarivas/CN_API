@@ -61,8 +61,8 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
+
 db.sqlite3
 .idea
-yankhistory
 history_yank
 
