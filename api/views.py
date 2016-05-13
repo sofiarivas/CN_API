@@ -4,8 +4,24 @@ from django.views.generic import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from rest_framework import viewsets
+from .models import Color
+from .serializers import ColorSerializer
 # Create your views here.
+
+# Esto es un Viewset
+
+
+class ColorViewSet(viewsets.ModelViewSet):
+    queryset = Color.objects.all()
+    serializer_class = ColorSerializer
+
+
+class DisplayColors(View):
+    def get(self, request):
+        template_name = 'api/display_colors.html'
+        return render(request, template_name)
+
 
 
 def index(request):
