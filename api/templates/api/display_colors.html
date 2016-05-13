@@ -24,14 +24,16 @@
             // $.ajax
             $.get('/api/colors', {}, function(response){
                 // response = JSON.parse(response);
-                console.log(response);
                 response = response[0];
+                console.log(response);
 
-                template = $("#color-template").find(".color-item").clone();
-                console.log(template)
-                template.find(".color-name").text(response.name);
-
+                template = $($("#color-template").html());
                 $("#color_container").append(template);
+
+                f = template.find(".color-name");
+                console.log(f)
+                f.html(response.name);
+                console.log(f);
             });
         });
 
