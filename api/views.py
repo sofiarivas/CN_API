@@ -19,7 +19,7 @@ class ColorViewSet(viewsets.ModelViewSet):
 
 class DisplayColors(View):
     def get(self, request):
-        template_name = 'api/display_colors.html'
+        template_name = 'api/display_advanced.html'
         return render(request, template_name)
 
 

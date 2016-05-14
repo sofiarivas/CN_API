@@ -14,28 +14,27 @@
     <template id="color-template">
         <div class="color-item">
             <div> Nombre: <span class="color-name"></span> </div>
+            <div> Hexadecimal: <span class="color-hex"></span> </div>
         </div>
     </template>
     <script>
-    // cuando la página cargue
         $(function(){
-            // 'api/getColors' mal formado
-            // 'api/colors/create'
-            // $.ajax
-            $.get('/api/colors', {}, function(response){
-                // response = JSON.parse(response);
-                response = response[0];
-                console.log(response);
+            $.get('/api/colors', {}, recibeColores);
+        });
 
+        function recibeColores(response){
+            for(var i=0; i < response.length; i++){
                 template = $($("#color-template").html());
+
                 $("#color_container").append(template);
 
-                f = template.find(".color-name");
-                console.log(f)
-                f.html(response.name);
-                console.log(f);
-            });
-        });
+                var f = template.find(".color-name");
+                f.html(response[i].name);
+                
+                var h = template.find(".color-hex");
+                h.html(response[i].hexadecimal);
+            }
+        }
 
     </script>
 </body>

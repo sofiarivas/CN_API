@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Colors</title>
+
+</head>
+<body>
+
+{% verbatim vue_app %}
+<div id="app">
+    <h1>Esto es una aplicación con Vue</h1>
+    <span>{{message}}</span>
+    <br>
+    <input type="text" v-model="message">
+
+    <pre>
+            {{ $data | json }}
+    </pre>
+</div>
+{% endverbatim vue_app %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.js"></script>
+<script>
+new Vue({
+    el: "#app",
+    data: {
+        'message': "Hola Vue"
+    }
+});
+</script>
+</body>
+
+</html>
