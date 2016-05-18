@@ -8,21 +8,9 @@ router = routers.DefaultRouter()
 router.register(r'colors', views.ColorViewSet)
 
 urlpatterns = [
-        url(r'^display/$', views.DisplayColors.as_view(), name="display"),
-        url(r'^', include(router.urls))
-    ]
-
-
-
-
-
-
-
-
-
-
-
-
+    url(r'^display/$', views.DisplayColors.as_view(), name="display"),
+    url(r'^', include(router.urls))
+]
 
     # url(r'index/$', IndexView.as_view()), # varias urls
     # url(r'index$', csrf_exempt(IndexView.as_view())), # varias urls
