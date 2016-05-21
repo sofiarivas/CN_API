@@ -3,32 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <title>Colors</title>
-
+    <style>
+        .completed{
+            text-decoration: line-through;
+        }
+        .important{
+            color: red;
+        }
+        .semi-important{
+            color: yellow;
+            background: red;
+        }
+        .not-important{
+            color: white;
+            background: #666;
+        }
+    </style>
 </head>
+
 <body>
 
 {% verbatim vue_app %}
+
 <div id="app">
+
     <h1>Esto es una aplicación con Vue</h1>
     <span>{{message}}</span>
+    <div>La cuenta es: {{count}}</div>
     <br>
     <input type="text" v-model="message">
+    <button @click='muestra_alerta'>
+        +1
+    </button>
+    <button @click='loadColors'> Traer Colores</button>
 
-    <pre>
-            {{ $data | json }}
-    </pre>
+    <ul>
+        <li v-for="color in colors">
+            <color :color_name="color.name" :hex="color.hexadecimal">
+            </color>
+        </li>    
+    </ul>
+
+    <template id="matti">
+        <h3>{{color_name}}</h3>
+        <div>Hexadecimal: {{hex}}</div>
+    </template>
 </div>
+
 {% endverbatim vue_app %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.24/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.7.0/vue-resource.js"></script>
 <script>
+Vue.component('color',{
+    template: "#matti",
+    data: function(){
+        return {
+            // 'name': 'Soy un color',
+            // 'hex': '#000'
+        }
+    },
+    props: ['color_name', 'hex']
+}
+    );
+
 new Vue({
     el: "#app",
+    ready: function(){
+        this.loadColors();
+    },
     data: {
-        'message': "Hola Vue"
+        'message': "Hola vue",
+        'count': 0,
+        'tasks': [
+            {name: 'Comprar las verduras', completed: 0, priority: 2},
+            {name: 'Pasear al perro', completed: 0, priority: 1},
+            {name: 'BAIA BAIA', completed: 1, priority: 0}
+        ],
+        'colors': []
+    },
+    methods: {
+        'muestra_alerta': function(){
+            this.count = this.count + 1;
+        },
+        'complete': function(task){
+            task.completed = !task.completed;
+        },
+        'loadColors': function(){
+            this.$http.get('/api/colors', function(data, status, request){
+                if(status >= 200 && status <= 207){
+                    console.log(data);
+                    this.colors = data;
+                }
+            });
+        }
+
     }
 });
 </script>
 </body>
 
+<!-- :class="{ 'completed': task.completed,
+            'important': task.priority == 0,
+            'semi-important': task.priority == 1,
+            'not-important': task.priority > 1,
+            }" -->
 </html>
