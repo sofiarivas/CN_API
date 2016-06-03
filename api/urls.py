@@ -8,8 +8,10 @@ router = routers.DefaultRouter()
 router.register(r'colors', views.ColorViewSet)
 
 urlpatterns = [
+	url(r'^search/$', views.SearchColors.as_view(),name="search"),
     url(r'^display/$', views.DisplayColors.as_view(), name="display"),
-    url(r'^', include(router.urls))
+    url(r'^', include(router.urls)),
+    
 ]
 
     # url(r'index/$', IndexView.as_view()), # varias urls

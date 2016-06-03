@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -22,7 +22,8 @@ class DisplayColors(View):
         template_name = 'api/display_advanced.html'
         return render(request, template_name)
 
-
+class SearchColors(TemplateView):
+    template_name = 'api/search.html'
 
 def index(request):
     return HttpResponse("INDEX")

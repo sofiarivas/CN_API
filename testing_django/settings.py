@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
-    'rest_framework'
+    'rest_framework',
+    'django.contrib.algoliasearch',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -121,3 +122,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+ALGOLIA = {
+    'APPLICATION_ID': "VUPR3RSXRE",
+    'API_KEY': "f68eed21179fb9ee254bacd2e4c4c7cc"
+}
